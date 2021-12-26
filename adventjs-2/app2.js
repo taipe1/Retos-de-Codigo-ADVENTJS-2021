@@ -5,15 +5,18 @@
 // Transforma el texto a un objeto que contenga el nombre de cada regalo y las veces que aparece. Por ejemplo, si tenemos el texto:
 
 
-
-
 const listGifts = (carta) => {
-  let aux = carta.split(" ")
-  const expre = aux.filter(e => /[a-zA-Z]/g.test(e));
-  expre
+  const aux = carta
+                .split(" ")
+                .filter(e => !e.startsWith('_'))
+                .reduce((acumulador,valor) => {
+                  acumulador[valor] = (acumulador[valor] || 0) + 1;
+                  return acumulador;
+                },{});
+ return aux;
 }
-const carta = 'bici coche balón _playstation bici coche peluche'
 
+const carta = 'bici coche balón _playstation bici coche peluche'
 const regalos = listGifts(carta)
 console.log(regalos)
 /*
